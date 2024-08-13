@@ -1,0 +1,19 @@
+{
+  "name" : "kaadon/kaadon-sms",
+  "description" : "kaadon sms package",
+  "require-dev" : {
+    "topthink/framework" : "6.*|8.*"
+  },
+  "license" : "MIT",
+  "autoload" : {
+    "psr-4" : {
+      "Kaadon\\KaadonSms\\" : "src/"
+    }
+  },
+  "authors" : [
+    {
+      "name" : "kaadon.com",
+      "email" : "kaadon.com@gmail.com"
+    }
+  ]
+}
