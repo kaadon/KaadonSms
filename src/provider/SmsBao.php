@@ -15,10 +15,10 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\Sms\provider;
+namespace Kaadon\KaadonSms\provider;
 
-use kaadon\Sms\base\KaadonSmsException;
-use kaadon\Sms\base\SmsBase;
+use Kaadon\KaadonSms\base\KaadonSmsException;
+use Kaadon\KaadonSms\base\SmsBase;
 
 class SmsBao extends SmsBase
 {
@@ -46,7 +46,7 @@ class SmsBao extends SmsBase
         parent::__construct($config, $mobile, $content, $code);
     }
     /**
-     * @throws \kaadon\Sms\base\KaadonSmsException
+     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
     public function __sendContent(): array
     {

@@ -15,7 +15,7 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\Sms\base;
+namespace Kaadon\KaadonSms\base;
 
 class KaadonSmsException extends \Exception
 {

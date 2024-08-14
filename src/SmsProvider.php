@@ -15,9 +15,9 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\Sms;
+namespace kaadon\KaadonSms;
 
-use kaadon\Sms\base\KaadonSmsException;
+use Kaadon\KaadonSms\base\KaadonSmsException;
 
 /**
  *
@@ -25,7 +25,7 @@ use kaadon\Sms\base\KaadonSmsException;
 class SmsProvider
 {
     /**
-     * @throws \kaadon\Sms\base\KaadonSmsException
+     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
     public static function send(string $mobile, string $content, string $code, SmsProviderEnum $provider, array $config = []): array
     {
@@ -36,7 +36,7 @@ class SmsProvider
     }
 
     /**
-     * @throws \kaadon\Sms\base\KaadonSmsException
+     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
     public static function verify(array $params, SmsProviderEnum $provider, array $config = []): bool
     {

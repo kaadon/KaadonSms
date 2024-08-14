@@ -15,9 +15,9 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\Sms;
+namespace kaadon\KaadonSms;
 
-use kaadon\Sms\provider\SmsBao;
+use Kaadon\KaadonSms\provider\SmsBao;
 
 enum SmsProviderEnum: int
 {

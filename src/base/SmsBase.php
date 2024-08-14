@@ -15,7 +15,7 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\Sms\base;
+namespace Kaadon\KaadonSms\base;
 
 abstract class SmsBase
 {
@@ -52,7 +52,7 @@ abstract class SmsBase
     }
 
     /**
-     * @throws \kaadon\Sms\base\KaadonSmsException
+     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
     public function sendContent(): array
     {
