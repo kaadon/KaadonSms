@@ -39,7 +39,7 @@ class SmsBao extends SmsBase
     /**
      * @throws \Exception
      */
-    public function __construct(array $config, string $mobile, ?string $content = null, ?string $code = null)
+    private function __construct(array $config, string $mobile, ?string $content = null, ?string $code = null)
     {
         if (!isset($config['user'])) throw new \Exception('短信平台帐号不能为空');
         if (!isset($config['pass'])) throw new \Exception('短信平台帐号不能为空');
@@ -48,7 +48,7 @@ class SmsBao extends SmsBase
     /**
      * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
-    public function __sendContent(): array
+    private function __sendContent(): array
     {
         $sendurl = $this->url . "sms?u=" . $this->config['user'] . "&p=" . md5($this->config['pass']) . "&m=" . $this->mobile . "&c=" . urlencode($this->content);
         $result = file_get_contents($sendurl);

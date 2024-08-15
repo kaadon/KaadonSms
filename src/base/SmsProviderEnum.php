@@ -15,7 +15,7 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\KaadonSms;
+namespace Kaadon\KaadonSms\base;
 
 use Kaadon\KaadonSms\provider\SmsBao;
 
@@ -44,6 +44,4 @@ enum SmsProviderEnum: int
             self::SMSBAO => function_exists("config") ? config('kaadon_sms.' . $this->name) : [],
         };
     }
-
-
 }

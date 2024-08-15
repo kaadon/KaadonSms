@@ -17,7 +17,7 @@
 
 namespace Kaadon\KaadonSms\base;
 
-abstract class SmsBase
+abstract class SmsBase implements SmsInterface
 {
 
     protected array $config = [];
@@ -43,12 +43,15 @@ abstract class SmsBase
      */
     public function verifyCode(?array $params): bool
     {
-        $code = redisCacheGet('sms_code_' . md5($this->mobile));
+        $code = Cache('sms_code_' . md5($this->mobile));
         if (empty($code)) return false;
-        if ($this->is_verify_remote) return $this->__verifyCode([
-            'params' => $params,
-            'code' => $code
-        ]);else throw new \Exception('无需远程验证请使用本地验证') ;
+        if ($this->is_verify_remote) {
+            if (!method_exists($this, '__verifyCode')) throw new \Exception('请实现__verifyCode方法');
+            return $this->__verifyCode([
+                'params' => $params,
+                'code'   => $code
+            ]);
+        } else throw new \Exception('无需远程验证请使用本地验证');
     }
 
     /**
@@ -57,6 +60,7 @@ abstract class SmsBase
     public function sendContent(): array
     {
         if (empty($this->content)) throw new KaadonSmsException('短信内容不能为空');
+        if (!method_exists(self::class, '__sendContent')) throw new KaadonSmsException('请实现__sendContent方法');
         return $this->__sendContent();
     }
 
@@ -70,17 +74,19 @@ abstract class SmsBase
         if (empty($this->content)) $this->content = '您的验证码是：{code}';
         if (!str_contains($this->content, '{code}')) throw new KaadonSmsException('短信内容必须包含{code}');
         $this->content = str_replace('{code}', $this->code, $this->content);
+        if (!method_exists(self::class, '__sendContent')) throw new \Exception('请实现__sendContent方法');
         return $this->__sendContent();
     }
 
-    protected function __verifyCode(?array $params = null): bool
+    private function __verifyCode(?array $params = null): bool
     {
         return true;
     }
 
-    protected function __sendContent(): array
+    private function __sendContent(): array
     {
         return [];
     }
+
 
 }

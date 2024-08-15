@@ -15,9 +15,11 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace kaadon\KaadonSms;
+namespace Kaadon\KaadonSms;
 
 use Kaadon\KaadonSms\base\KaadonSmsException;
+use Kaadon\KaadonSms\base\SmsInterface;
+use Kaadon\KaadonSms\base\SmsProviderEnum;
 
 /**
  *
