@@ -21,7 +21,7 @@ use Kaadon\KaadonSms\base\KaadonSmsException;
 use Kaadon\KaadonSms\base\SmsBase;
 
 /**
- *
+ * 短信宝
  */
 class SmsBao extends SmsBase
 {
@@ -45,18 +45,29 @@ class SmsBao extends SmsBase
     );
 
     /**
+     * @param string $url
+     * @return void
+     */
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
+    }
+    /**
      * @var string
      */
     public string $url = "https://api.smsbao.com/";
+
     /**
-     * @throws \Exception
+     * @throws KaadonSmsException
      */
-    private function __construct(array $config, string $mobile)
+    public function __construct(array $config, string $mobile, ?string $content)
     {
-        if (!isset($config['user'])) throw new \Exception('短信平台帐号不能为空');
-        if (!isset($config['pass'])) throw new \Exception('短信平台帐号不能为空');
-        parent::__construct($config, $mobile, null);
+        if (!isset($config['user'])) throw new KaadonSmsException('短信平台帐号不能为空');
+        if (!isset($config['pass'])) throw new KaadonSmsException('短信平台帐号不能为空');
+        parent::__construct($config, $mobile, $content);
     }
+
+
     /**
      * @throws \Kaadon\KaadonSms\base\KaadonSmsException
      */
