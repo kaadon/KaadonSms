@@ -15,7 +15,7 @@
  *   +----------------------------------------------------------------------
  **/
 
-namespace Kaadon\KaadonSms\base;
+namespace Kaadon\KaadonSms;
 
 use Kaadon\KaadonSms\provider\SmsBao;
 

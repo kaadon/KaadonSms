@@ -20,9 +20,18 @@ namespace Kaadon\KaadonSms\provider;
 use Kaadon\KaadonSms\base\KaadonSmsException;
 use Kaadon\KaadonSms\base\SmsBase;
 
+/**
+ *
+ */
 class SmsBao extends SmsBase
 {
+    /**
+     * @var bool
+     */
     protected bool $is_verify_remote = false;
+    /**
+     * @var array|string[]
+     */
     public array $statusStr = array(
         "0" => "短信发送成功",
         "-1" => "参数不全",
@@ -35,15 +44,18 @@ class SmsBao extends SmsBase
         "50" => "内容含有敏感词"
     );
 
+    /**
+     * @var string
+     */
     public string $url = "https://api.smsbao.com/";
     /**
      * @throws \Exception
      */
-    private function __construct(array $config, string $mobile, ?string $content = null, ?string $code = null)
+    private function __construct(array $config, string $mobile)
     {
         if (!isset($config['user'])) throw new \Exception('短信平台帐号不能为空');
         if (!isset($config['pass'])) throw new \Exception('短信平台帐号不能为空');
-        parent::__construct($config, $mobile, $content, $code);
+        parent::__construct($config, $mobile, null);
     }
     /**
      * @throws \Kaadon\KaadonSms\base\KaadonSmsException

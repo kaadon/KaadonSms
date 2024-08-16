@@ -18,8 +18,7 @@
 namespace Kaadon\KaadonSms;
 
 use Kaadon\KaadonSms\base\KaadonSmsException;
-use Kaadon\KaadonSms\base\SmsInterface;
-use Kaadon\KaadonSms\base\SmsProviderEnum;
+use Kaadon\KaadonSms\base\SmsBase;
 
 /**
  *
@@ -27,18 +26,31 @@ use Kaadon\KaadonSms\base\SmsProviderEnum;
 class SmsProvider
 {
     /**
-     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
+     * @param string $mobile
+     * @param string $content
+     * @param string $code
+     * @param SmsProviderEnum $provider
+     * @param array $config
+     * @return array
+     * @throws KaadonSmsException
+     * @throws \Exception
      */
-    public static function send(string $mobile, string $content, string $code, SmsProviderEnum $provider, array $config = []): array
+    public static function sendCode(string $mobile, string $content, string $code, SmsProviderEnum $provider, array $config = []): array
     {
         $config = array_merge($provider->getConfig() ?: [], $config);
         if (empty($config)) throw new KaadonSmsException('短信平台[' . $provider->label() . ']配置不能为空');
+        /** @var SmsBase $providerClass */
         $providerClass = new ($provider->getClass())($config, $mobile, $content, $code);
-        return $providerClass->sendContent();
+        return $providerClass->sendCode();
     }
 
     /**
-     * @throws \Kaadon\KaadonSms\base\KaadonSmsException
+     * @param array $params
+     * @param SmsProviderEnum $provider
+     * @param array $config
+     * @return bool
+     * @throws KaadonSmsException
+     * @throws \Exception
      */
     public static function verify(array $params, SmsProviderEnum $provider, array $config = []): bool
     {
@@ -46,6 +58,7 @@ class SmsProvider
         if (empty($config)) throw new KaadonSmsException('短信平台[' . $provider->label() . ']配置不能为空');
         $mobile        = $params['mobile'] ?? throw new KaadonSmsException('手机号必须存在');
         $code          = $params['code'] ?? throw new KaadonSmsException('短信验证码必须存在');
+        /** @var SmsBase $providerClass */
         $providerClass = new ($provider->getClass())($config, $mobile, null, $code);
         return $providerClass->verifyCode($params);
     }

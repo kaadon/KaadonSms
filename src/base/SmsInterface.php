@@ -26,4 +26,8 @@ interface SmsInterface
 
     public function sendCode(): array;
 
+    public function batchSendCode():array;
+
+    public function batchSendContent():array;
+
 }
